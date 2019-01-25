@@ -18,3 +18,23 @@ p {
   margin-right: auto;
   /* width: 50%; */
 }
+
+#card {
+  border-radius: 15px;
+  background: #FAF6D8;
+  padding: 20px;
+  margin-top:30px;
+  width: 200px;
+  height: 150px;
+
+  /* width: 250px; */
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.error {
+  display: none;
+  font-size: 22px;
+  color: black;
+  text-align: center;
+}
