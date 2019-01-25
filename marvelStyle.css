@@ -1,5 +1,5 @@
 body {
-  background-color: lightblue;
+  background-color: #FDE8D3;
 }
 
 h1 {
@@ -10,4 +10,11 @@ h1 {
 p {
   font-family: 'Shadows Into Light', cursive;
   font-size: 20px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 50%; */
 }

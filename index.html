@@ -7,7 +7,8 @@
 	</head>
 
 	<body>
-		<hl>Marvel Madness</hl>
+		<!-- <hl>Marvel Madness</hl> -->
+		<img src="mm_logo-02.png" alt="Marvel Madness Logo" width="400px" class="center"></img>
 		<p>This is an amazing adventure in Marvel.  Please type in words into the boxes and we'll give you a kickass marvel adventure.</p>
 		<div>
 			First name: <input type="text" name="fname"><br>
@@ -26,7 +27,7 @@
 	      </div>
 	      <!-- <a id='audio' href="#" target="_blank">Click to listen to Mad Lib</a> -->
 	      <footer>
-	        <p>Powered by: <a href="https://github.com/SamSamskies/libberfy">Libberfy Mad Libs API</a> and <a href="http://tts-api.com/">TTS-API.COM</a>
+	        <p>Powered by: <a href="https://github.com/SamSamskies/libberfy">Libberfy Mad Libs API</a> and <a href="https://tts-api.com/">TTS-API.COM</a>
 	        </p>
 	      </footer>
 	    </div>
@@ -41,7 +42,7 @@
 	          $originalText.hide();
 	          $spinner.show();
 
-	          var url = "http://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
+	          var url = "https://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
 
 	          $.getJSON(url, function( response ) {
 	            $spinner.hide();
@@ -68,7 +69,7 @@
 	          });
 	          $madlibFormContainer.addClass('show-text');
 	          $madlibFormContainer.find('input[type=submit]').remove();
-	          var textToAudioUrl = "http://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
+	          var textToAudioUrl = "https://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
 
 	          $('#audio').attr('href', textToAudioUrl).show();
 	        });
