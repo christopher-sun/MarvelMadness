@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Libberfy Mad Libs API Demo</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Vast+Shadow' rel='stylesheet' type='text/css'>
+    <style>
+      body {
+        background: url('retina_wood.png')
+      }
+      .container {
+        margin: 0 auto;
+        min-width: 660px;
+        width: 660px;
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+        font-family: 'Vast Shadow', cursive;
+        margin: 25px auto 50px auto;
+        width: 500px;
+      }
+      h1 a, a:hover {
+        text-decoration: none;
+        color: black;
+      }
+      textarea.form-control {
+        height: 200px;
+      }
+      input[type=submit] {
+        margin-top: 25px;
+        float: right;
+      }
+      #madlib-form-container {
+        text-align: left;
+        margin-bottom: 50px;
+        color: white;
+        font-size: 0;
+      }
+      #madlib-form-container.show-text {
+        color: black;
+        font-size: 22px;
+      }
+      #madlib-form-container input[type=text] {
+        margin: 10px 0;
+        height: 50px;
+      }
+      #audio {
+        display: none;
+        margin-top: 50px;
+        font-size: 30px;
+      }
+      .spinner {
+        display: none;
+      }
+      .error {
+        display: none;
+        font-size: 22px;
+        color: black;
+        text-align: center;
+      }
+      footer {
+        margin-top: 300px;
+        color: #666;
+      }
+    </style>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-47550058-1', 'libberfy.com');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <a href="https://github.com/SamSamskies/libberfy-demo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <div class="container">
+      <h1><a href='/'>Libberfy Mad Libs API Demo</a></h1>
+      <img class='spinner' src='ajax-loader.gif'>
+      <form id='original-text' role='form'>
+        <textarea class='form-control' placeholder='Copy and paste or type text that you want to Mad Libberfy' autofocus></textarea>
+        <input type='submit' class='btn btn-primary'>
+      </form>
+      <p class='error'>Please enter more text.</p>
+      <div id="madlib-form-container">
+      </div>
+      <a id='audio' href="#" target="_blank">Click to listen to Mad Lib</a>
+      <footer>
+        <p>Powered by: <a href="https://github.com/SamSamskies/libberfy">Libberfy Mad Libs API</a> and <a href="http://tts-api.com/">TTS-API.COM</a>
+        </p>
+      </footer>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+      (function() {
+        $('#original-text').submit( function(e) {
+          e.preventDefault();
+          var $originalText = $(this);
+          var $spinner = $('.spinner');
+
+          $originalText.hide();
+          $spinner.show();
+
+          var url = "http://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
+
+          $.getJSON(url, function( response ) {
+            $spinner.hide();
+            var $madlibFormContainer = $('#madlib-form-container');
+            $madlibFormContainer.append(response.madlib);
+            $madlibFormContainer.find('input[type=submit]').addClass('btn btn-primary');
+            $inputFields = $madlibFormContainer.find('input[type=text]');
+
+            if($inputFields.length > 0) {
+              $inputFields.addClass('form-control')
+              $inputFields[0].focus();
+            } else {
+              $('.error').show();
+            }
+          });
+        });
+
+        $(document).on('submit', '#madlib-form-container', function(e) {
+          e.preventDefault();
+          var $madlibFormContainer = $(this);
+
+          $madlibFormContainer.find('input[type=text]').each( function() {
+            $(this).replaceWith(this.value);
+          });
+          $madlibFormContainer.addClass('show-text');
+          $madlibFormContainer.find('input[type=submit]').remove();
+          var textToAudioUrl = "http://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
+
+          $('#audio').attr('href', textToAudioUrl).show();
+        });
+      })();
+    </script>
+  </body>
+</html>

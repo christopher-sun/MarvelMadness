@@ -14,6 +14,66 @@
 			  Last name: <input type="text" name="lname"><br>
 			  <input type="submit" value="Submit">
   		</div>
+		<div class="container">
+	      <h1><a href='/'>Libberfy Mad Libs API Demo</a></h1>
+	      <img class='spinner' src='ajax-loader.gif'>
+	      <form id='original-text' role='form'>
+	        <textarea class='form-control' placeholder='Copy and paste or type text that you want to Mad Libberfy' autofocus></textarea>
+	        <input type='submit' class='btn btn-primary'>
+	      </form>
+	      <p class='error'>Please enter more text.</p>
+	      <div id="madlib-form-container">
+	      </div>
+	      <!-- <a id='audio' href="#" target="_blank">Click to listen to Mad Lib</a> -->
+	      <footer>
+	        <p>Powered by: <a href="https://github.com/SamSamskies/libberfy">Libberfy Mad Libs API</a> and <a href="http://tts-api.com/">TTS-API.COM</a>
+	        </p>
+	      </footer>
+	    </div>
+	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	    <script>
+	      (function() {
+	        $('#original-text').submit( function(e) {
+	          e.preventDefault();
+	          var $originalText = $(this);
+	          var $spinner = $('.spinner');
+
+	          $originalText.hide();
+	          $spinner.show();
+
+	          var url = "http://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
+
+	          $.getJSON(url, function( response ) {
+	            $spinner.hide();
+	            var $madlibFormContainer = $('#madlib-form-container');
+	            $madlibFormContainer.append(response.madlib);
+	            $madlibFormContainer.find('input[type=submit]').addClass('btn btn-primary');
+	            $inputFields = $madlibFormContainer.find('input[type=text]');
+
+	            if($inputFields.length > 0) {
+	              $inputFields.addClass('form-control')
+	              $inputFields[0].focus();
+	            } else {
+	              $('.error').show();
+	            }
+	          });
+	        });
+
+	        $(document).on('submit', '#madlib-form-container', function(e) {
+	          e.preventDefault();
+	          var $madlibFormContainer = $(this);
+
+	          $madlibFormContainer.find('input[type=text]').each( function() {
+	            $(this).replaceWith(this.value);
+	          });
+	          $madlibFormContainer.addClass('show-text');
+	          $madlibFormContainer.find('input[type=submit]').remove();
+	          var textToAudioUrl = "http://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
+
+	          $('#audio').attr('href', textToAudioUrl).show();
+	        });
+	      })();
+	    </script>
   		<div id="root"></div>
 
   		<script src="script.js"></script>
