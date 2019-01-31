@@ -66,44 +66,44 @@ md5Request.send();
 
 //Madlibs
 
-(function() {
-  $('#original-text').submit( function(e) {
-	e.preventDefault();
-	var $originalText = $(this);
-	var $spinner = $('.spinner');
-
-	$originalText.hide();
-	$spinner.show();
-
-	var url = "https://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
-
-	$.getJSON(url, function( response ) {
-	  $spinner.hide();
-	  var $madlibFormContainer = $('#madlib-form-container');
-	  $madlibFormContainer.append(response.madlib);
-	  $madlibFormContainer.find('input[type=submit]').addClass('btn btn-primary');
-	  $inputFields = $madlibFormContainer.find('input[type=text]');
-
-	  if($inputFields.length > 0) {
-		$inputFields.addClass('form-control')
-		$inputFields[0].focus();
-	  } else {
-		$('.error').show();
-	  }
-	});
-  });
-
-  $(document).on('submit', '#madlib-form-container', function(e) {
-	e.preventDefault();
-	var $madlibFormContainer = $(this);
-
-	$madlibFormContainer.find('input[type=text]').each( function() {
-	  $(this).replaceWith(this.value);
-	});
-	$madlibFormContainer.addClass('show-text');
-	$madlibFormContainer.find('input[type=submit]').remove();
-	var textToAudioUrl = "https://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
-
-	$('#audio').attr('href', textToAudioUrl).show();
-  });
-})();
+// (function() {
+//   $('#original-text').submit( function(e) {
+// 	e.preventDefault();
+// 	var $originalText = $(this);
+// 	var $spinner = $('.spinner');
+//
+// 	$originalText.hide();
+// 	$spinner.show();
+//
+// 	var url = "https://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
+//
+// 	$.getJSON(url, function( response ) {
+// 	  $spinner.hide();
+// 	  var $madlibFormContainer = $('#madlib-form-container');
+// 	  $madlibFormContainer.append(response.madlib);
+// 	  $madlibFormContainer.find('input[type=submit]').addClass('btn btn-primary');
+// 	  $inputFields = $madlibFormContainer.find('input[type=text]');
+//
+// 	  if($inputFields.length > 0) {
+// 		$inputFields.addClass('form-control')
+// 		$inputFields[0].focus();
+// 	  } else {
+// 		$('.error').show();
+// 	  }
+// 	});
+//   });
+//
+//   $(document).on('submit', '#madlib-form-container', function(e) {
+// 	e.preventDefault();
+// 	var $madlibFormContainer = $(this);
+//
+// 	$madlibFormContainer.find('input[type=text]').each( function() {
+// 	  $(this).replaceWith(this.value);
+// 	});
+// 	$madlibFormContainer.addClass('show-text');
+// 	$madlibFormContainer.find('input[type=submit]').remove();
+// 	var textToAudioUrl = "https://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
+//
+// 	$('#audio').attr('href', textToAudioUrl).show();
+//   });
+// })();
