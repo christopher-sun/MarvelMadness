@@ -24,8 +24,8 @@ p {
   background: #FAF6D8;
   padding: 20px;
   margin-top:30px;
-  width: 200px;
-  height: 150px;
+  width: 500px;
+  height: 250px;
 
   /* width: 250px; */
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.08);
@@ -40,3 +40,36 @@ p {
   color: black;
   text-align: center;
 }
+
+#textBox {
+    height: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+@media screen and (max-width: 557px) {
+    #card {
+      width: 90%;
+      height: 45%;
+      margin-right:10%;
+    }
+    #header {
+        width: 90%;
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        /* horizontal-align: middle; */
+        /* padding: 10%  */
+        padding-top:20%;
+    }
+}
+
+/* .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vh;
+  flex-wrap: no-wrap;
+} */
