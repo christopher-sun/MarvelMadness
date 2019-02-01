@@ -21,7 +21,7 @@ md5Request.onload = function () {
 	console.log(this.response);
 	hash = this.response;
 	var request = new XMLHttpRequest();
-	request.open('GET', 'https://gateway.marvel.com:443/v1/public/events?limit=5&ts='+ ts+'&apikey=e147157469eaafd8c42877fad76e062b&hash='+ hash, true);
+	request.open('GET', 'https://gateway.marvel.com:443/v1/public/events?limit=1&ts='+ ts+'&apikey=e147157469eaafd8c42877fad76e062b&hash='+ hash, true);
 	// https://gateway.marvel.com:443/v1/public/events?apikey=e147157469eaafd8c42877fad76e062b
 	request.onload = function () {
 
