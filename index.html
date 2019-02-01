@@ -4,25 +4,29 @@
 		<title>Marvel Madness</title>
 		<link rel="stylesheet" type="text/css" href="marvelStyle.css">
 		<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+		<!--
+		This criterion is linked to a Learning Outcome Design - Embedded font
+		Embed at least one font (not restricted to Google Fonts)
+		-->
 		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	</head>
 
 	<body>
-		<!-- <hl>Marvel Madness</hl> -->
+		<!-- This criterion is linked to a Learning Outcome Design - Image quality
+		All images have proportional aspect ratios, are free of artifacting (i.e. not blurry), and have ALT tags
+
+		Design - Typographical design
+		Consistent typographic hierarchy, text has good contrast from background, typefaces are appropriate and legible.
+		-->
 		<img src="mm_logo-02.png" alt="Marvel Madness Logo" width="400px" class="center" id="header"></img>
-		<!-- <p>This is an amazing adventure in Marvel.  Please type in words into the boxes and we'll give you a kickass marvel adventure.</p>
-		<div>
-			First name: <input type="text" name="fname"><br>
-			  Last name: <input type="text" name="lname"><br>
-			  <input type="submit" value="Submit">
-  		</div> -->
 		<div class="container center" id="card">
-	      <!-- <h1><a href='/'>Libberfy Mad Libs API Demo</a></h1> -->
-	      <!-- <img class='spinner' src='ajax-loader.gif'> -->
 		  <div id="root"></div>
 
-		  <!-- <script src="script.js"></script> -->
 		  <script>
+		  /*
+		  Interactive - API
+		  Must incorporate at least 1 API accessed by interactor's text input: news source, social media network, audio/visual resource
+		  */
 		  const app = document.getElementById('root');
 
 		  const container = document.createElement('div');
@@ -63,10 +67,6 @@
 					comic.description = comic.description.substring(0, 300);
 					p.textContent = `${comic.description}...`;
 
-					// container.appendChild(card);
-					// card.appendChild(h1);
-					// card.appendChild(p);
-
 					  document.getElementById("textBox").innerHTML=comic.description;
 
 				  });
@@ -81,18 +81,21 @@
 		  }
 		  md5Request.send();
 		  </script>
+		  <!--
+		  This criterion is linked to a Learning Outcome Design - Proper user inputs
+		  Clearly legible user input (e.g. text field, slider, mouse click)
+		  -->
 	      <form id='original-text' role='form'>
 	        <textarea class='form-control' placeholder='Copy and paste or type text that you want to Madlibbify' autofocus id="textBox"></textarea>
+			<!--
+			This criterion is linked to a Learning Outcome Interactive - Dynamic
+			Dynamically generates content based on user input (for example, a "submit" button
+			-->
 	        <br><input type='submit' class='btn btn-primary'>
 	      </form>
 	      <p class='error'>Please enter more text.</p>
 	      <div id="madlib-form-container">
 	      </div>
-	      <!-- <a id='audio' href="#" target="_blank">Click to listen to Mad Lib</a> -->
-	      <!-- <footer>
-	        <p>Powered by: <a href="https://github.com/SamSamskies/libberfy">Libberfy Mad Libs API</a> and <a href="https://tts-api.com/">TTS-API.COM</a>
-	        </p>
-	      </footer> -->
 	    </div>
 
 
@@ -107,6 +110,11 @@
 
 	          $originalText.hide();
 	          $spinner.show();
+
+			  /*
+			  Interactive - API
+			  Must incorporate at least 1 API accessed by interactor's text input: news source, social media network, audio/visual resource
+			  */
 
 	          var url = "https://libberfy.herokuapp.com?html_form=1&q=" + $originalText.find('textarea').val()
 
@@ -126,6 +134,11 @@
 	          });
 	        });
 
+			/*
+			This criterion is linked to a Learning Outcome Interactive - API results shown
+			Webpage must display the results of the API call (for example, by retrieving images, or data from a URL or JSON
+			*/
+
 	        $(document).on('submit', '#madlib-form-container', function(e) {
 	          e.preventDefault();
 	          var $madlibFormContainer = $(this);
@@ -136,9 +149,6 @@
 	          $madlibFormContainer.addClass('show-text');
 	          $madlibFormContainer.find('input[type=submit]').remove();
 			  $madlibFormContainer.append("<input type='submit' class='btn btn-primary' onClick='window.location.reload()' value='Redo!'>");
-	          // var textToAudioUrl = "https://tts-api.com/tts.mp3?q=" + $madlibFormContainer.text();
-
-	          // $('#audio').attr('href', textToAudioUrl).show();
 	        });
 	      })();
 	    </script>
